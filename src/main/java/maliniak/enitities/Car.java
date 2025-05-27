@@ -1,4 +1,4 @@
-package maliniak;
+package maliniak.enitities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
@@ -24,6 +24,8 @@ import jakarta.persistence.Entity;
  * }
  */
 @Entity
-public class MyEntity extends PanacheEntity {
-    public String field;
+public class Car extends PanacheEntity {
+    public String nazwa;
+    public String kolor;
+    public int przebieg;
 }
