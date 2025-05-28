@@ -21,4 +21,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.fetchCars();
   }
+
+  removeCar(car: any) {
+    this.carService.deleteCar(car.id).subscribe((data: any) => {
+      this.fetchCars();
+    });
+  }
 }

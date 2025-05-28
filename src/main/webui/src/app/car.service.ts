@@ -14,4 +14,8 @@ export class CarService {
   getCars(): Observable<any> {
     return this.http.get(this.url + '/api/cars', { headers: { Accept: 'application/json' } });
   }
+
+  deleteCar(id: Number): Observable<any> {
+    return this.http.delete(this.url + '/api/cars/'+id, { headers: { Accept: 'application/json' } });
+  }
 }

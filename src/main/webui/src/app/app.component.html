@@ -28,18 +28,21 @@
         <th scope="col">Nazwa</th>
         <th scope="col">Kolor</th>
         <th scope="col">Przebieg</th>
+        <th scope="col">Akcje</th>
       </tr>
       </thead>
       <tbody>
-
         @for (car of cars; track car.id) {
           <tr>
             <th scope="row">{{ car.nazwa }}</th>
             <td>{{ car.kolor }}</td>
             <td>{{ car.przebieg }}</td>
+            <td>
+              <button (click)="removeCar(car)">Usuń</button>
+<!--              -->
+            </td>
           </tr>
         }
-
       </tbody>
     </table>
     <div class="fetchCarsButton">
