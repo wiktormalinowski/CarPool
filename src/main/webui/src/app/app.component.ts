@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {CarService} from './car.service';
 
@@ -8,7 +8,7 @@ import {CarService} from './car.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'webui';
   cars: any[] = [];
   constructor(private carService: CarService) { }
@@ -16,5 +16,9 @@ export class AppComponent {
     this.carService.getCars().subscribe((data: any) => {
       this.cars = data;
     });
+  }
+
+  ngOnInit(): void {
+    this.fetchCars();
   }
 }

@@ -19,8 +19,8 @@
       </li>
     </ul>
   </nav>
-  <div class="container main">
-    <h3 class="title">Samochody dostępne</h3>
+  <div class="container-fluid">
+    <h3>Samochody dostępne</h3>
 
     <table>
       <thead>
@@ -34,16 +34,17 @@
 
         @for (car of cars; track car.id) {
           <tr>
-            <th scope="row">{{car.nazwa}}</th>
-            <td>{{car.kolor}}</td>
-            <td>{{car.przebieg}}</td>
+            <th scope="row">{{ car.nazwa }}</th>
+            <td>{{ car.kolor }}</td>
+            <td>{{ car.przebieg }}</td>
           </tr>
         }
 
       </tbody>
     </table>
-
-    <button (click)="fetchCars()" class="button">Get Another Joke</button>
+    <div class="fetchCarsButton">
+      <button style="text-align: center;" (click)="fetchCars()">Zaktualizuj listę aut</button>
+    </div>
   </div>
 </main>
 
