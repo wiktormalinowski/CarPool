@@ -1,4 +1,16 @@
-
 .fetchCarsButton {
   text-align: center;
+}
+
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 300px));
+  gap: 1rem;
+  justify-content: start;
+}
+
+.car-grid article.card {
+  width: 100%;
+  max-width: 300px;
+  margin: 0;
 }

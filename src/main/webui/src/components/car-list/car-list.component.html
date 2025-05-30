@@ -2,7 +2,7 @@
   Samochody {{ reservedView ? 'zarezerwowane' : 'dostępne do rezerwacji' }}
 </h3>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+<div class="car-grid">
   @for (car of cars; track car.id) {
     <article class="card">
       <section>
