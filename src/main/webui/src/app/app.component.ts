@@ -1,30 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {CarService} from './car.service';
+import {Component} from '@angular/core';
+import {CarListComponent} from '../components/car-list/car-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [CarListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'webui';
-  cars: any[] = [];
-  constructor(private carService: CarService) { }
-  fetchCars(): void {
-    this.carService.getCars().subscribe((data: any) => {
-      this.cars = data;
-    });
-  }
 
-  ngOnInit(): void {
-    this.fetchCars();
-  }
-
-  removeCar(car: any) {
-    this.carService.deleteCar(car.id).subscribe((data: any) => {
-      this.fetchCars();
-    });
-  }
 }
