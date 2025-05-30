@@ -2,36 +2,24 @@
   Samochody {{ reservedView ? 'zarezerwowane' : 'dostępne do rezerwacji' }}
 </h3>
 
-<!--<button (click)="reservedView = !reservedView">-->
-<!--  Pokaż {{ reservedView ? 'dostępne' : 'zarezerwowane' }} auta-->
-<!--</button>-->
-
-<table>
-  <thead>
-  <tr>
-    @for (key of getCarKeys(); track key) {
-      <th scope="col">{{ key }}</th>
-    }
-    <th scope="col">Akcje</th>
-  </tr>
-  </thead>
-  <tbody>
-    @for (car of cars; track car.id) {
-      <tr>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+  @for (car of cars; track car.id) {
+    <article class="card">
+      <section>
         @for (key of getCarKeys(); track key) {
-          <td>{{ car[key] }}</td>
+          <p><strong>{{ key }}:</strong> {{ car[key] }}</p>
         }
-        <td>
-          <button
-            (click)="reservedView ? reserveCar(car, false) : reserveCar(car, true)">
-            {{ reservedView ? 'Zwolnij' : 'Zarezerwuj' }}
-          </button>
-        </td>
-      </tr>
-    }
-  </tbody>
-</table>
+      </section>
+      <footer style="text-align: right;">
+        <button
+          (click)="reservedView ? reserveCar(car, false) : reserveCar(car, true)">
+          {{ reservedView ? 'Zwolnij' : 'Zarezerwuj' }}
+        </button>
+      </footer>
+    </article>
+  }
+</div>
 
-<div class="fetchCarsButton">
+<div style="margin-top: 1.5rem; text-align: center;">
   <button (click)="fetchCars()">Zaktualizuj listę aut</button>
 </div>
