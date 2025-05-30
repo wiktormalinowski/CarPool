@@ -18,4 +18,8 @@ export class CarService {
   deleteCar(id: Number): Observable<any> {
     return this.http.delete(this.url + '/api/cars/'+id, { headers: { Accept: 'application/json' } });
   }
+
+  reserve(id: Number): Observable<any> {
+    return this.http.post(this.url + '/api/cars/'+id, { headers: { Accept: 'application/json' } });
+  }
 }

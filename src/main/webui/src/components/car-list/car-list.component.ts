@@ -29,6 +29,12 @@ export class CarListComponent implements OnInit {
     });
   }
 
+  reserveCar(car: any) {
+    this.carService.reserve(car.id).subscribe((data: any) => {
+      this.fetchCars();
+    });
+  }
+
   getCarKeys(): string[] {
     return this.cars.length ? Object.keys(this.cars[0]) : [];
   }

@@ -25,7 +25,8 @@ import jakarta.persistence.Entity;
  */
 @Entity
 public class Car extends PanacheEntity {
-    public String nazwa;
-    public String kolor;
-    public int przebieg;
+    public String name;
+    public String colour;
+    public int mileage;
+    public boolean reserved;
 }

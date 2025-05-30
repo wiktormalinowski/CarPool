@@ -1,4 +1,4 @@
-<h3>Samochody dostępne</h3>
+<h3>Samochody dostępne do rezerwacji</h3>
 
 <table>
   <thead>
@@ -16,7 +16,7 @@
           <td>{{ car[key] }}</td>
         }
         <td>
-          <button (click)="removeCar(car)">Usuń</button>
+          <button (click)="reserveCar(car)">Zarezerwuj</button>
         </td>
       </tr>
     }
