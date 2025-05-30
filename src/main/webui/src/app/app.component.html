@@ -1,27 +1,7 @@
 <main class="container-fluid">
-  <nav>
-    <ul>
-      <li><strong>CarPool</strong></li>
-    </ul>
-    <ul>
-      <li><a href="#" class="secondary">dummy</a></li>
-      <li>
-        <details class="dropdown">
-          <summary>
-            Konto
-          </summary>
-          <ul dir="rtl">
-            <li><a href="#">Profil</a></li>
-            <li><a href="#">Ustawienia</a></li>
-            <li><a href="#">Wyloguj</a></li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </nav>
+  <app-navbar></app-navbar>
   <div class="container-fluid">
-    <app-car-list></app-car-list>
-    <app-car-list [reservedView]="true"></app-car-list>
+    <app-car-list-container></app-car-list-container>
   </div>
 </main>
 

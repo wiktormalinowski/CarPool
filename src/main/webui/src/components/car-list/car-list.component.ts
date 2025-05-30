@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CarService} from '../../services/car.service';
 
 @Component({
@@ -11,6 +11,7 @@ export class CarListComponent implements OnInit {
 
   cars: any[] = [];
   @Input() reservedView: boolean = false;
+  @Output() actionCompleted = new EventEmitter<void>();
 
   constructor(private carService: CarService) { }
 
@@ -26,13 +27,13 @@ export class CarListComponent implements OnInit {
 
   removeCar(car: any) {
     this.carService.deleteCar(car.id).subscribe((data: any) => {
-      this.fetchCars();
+      this.actionCompleted.emit();
     });
   }
 
   reserveCar(car: any, reserve: boolean): void {
     this.carService.updateReservation(car.id, reserve).subscribe(() => {
-      this.fetchCars();
+      this.actionCompleted.emit();
     });
   }
 
