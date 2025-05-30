@@ -11,12 +11,9 @@ export class CarListContainerComponent {
   @ViewChild('availableList') availableList!: CarListComponent;
   @ViewChild('reservedList') reservedList!: CarListComponent;
 
-  refreshBoth(): void {
+  refreshLists(): void {
     this.availableList.fetchCars();
     this.reservedList.fetchCars();
   }
 
-  handleAction(): void {
-    this.refreshBoth();
-  }
 }
