@@ -29,4 +29,8 @@ export class CarListComponent implements OnInit {
     });
   }
 
+  getCarKeys(): string[] {
+    return this.cars.length ? Object.keys(this.cars[0]) : [];
+  }
+
 }
