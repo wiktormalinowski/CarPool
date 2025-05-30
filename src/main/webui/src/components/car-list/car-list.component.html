@@ -1,4 +1,10 @@
-<h3>Samochody dostępne do rezerwacji</h3>
+<h3>
+  Samochody {{ reservedView ? 'zarezerwowane' : 'dostępne do rezerwacji' }}
+</h3>
+
+<!--<button (click)="reservedView = !reservedView">-->
+<!--  Pokaż {{ reservedView ? 'dostępne' : 'zarezerwowane' }} auta-->
+<!--</button>-->
 
 <table>
   <thead>
@@ -16,7 +22,10 @@
           <td>{{ car[key] }}</td>
         }
         <td>
-          <button (click)="reserveCar(car)">Zarezerwuj</button>
+          <button
+            (click)="reservedView ? reserveCar(car, false) : reserveCar(car, true)">
+            {{ reservedView ? 'Zwolnij' : 'Zarezerwuj' }}
+          </button>
         </td>
       </tr>
     }

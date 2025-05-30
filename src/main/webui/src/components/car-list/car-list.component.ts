@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CarService} from '../../services/car.service';
 
 @Component({
@@ -10,6 +10,7 @@ import {CarService} from '../../services/car.service';
 export class CarListComponent implements OnInit {
 
   cars: any[] = [];
+  @Input() reservedView: boolean = false;
 
   constructor(private carService: CarService) { }
 
@@ -18,8 +19,8 @@ export class CarListComponent implements OnInit {
   }
 
   fetchCars(): void {
-    this.carService.getCars().subscribe((data: any) => {
-      this.cars = data;
+    this.carService.getCars().subscribe((data: any[]) => {
+      this.cars = data.filter((car: any) => car.reserved === this.reservedView);
     });
   }
 
@@ -29,8 +30,8 @@ export class CarListComponent implements OnInit {
     });
   }
 
-  reserveCar(car: any) {
-    this.carService.reserve(car.id).subscribe((data: any) => {
+  reserveCar(car: any, reserve: boolean): void {
+    this.carService.updateReservation(car.id, reserve).subscribe(() => {
       this.fetchCars();
     });
   }
