@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {LoginComponent} from '../login/login.component';
+import {LogoutComponent} from '../logout/logout.component';
 
 @Component({
   selector: 'app-navbar',
   imports: [
-    LoginComponent
+    LogoutComponent
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'

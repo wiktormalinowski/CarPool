@@ -1,0 +1,23 @@
+<main class="container login-wrapper">
+  <section>
+    <h2>Zaloguj się</h2>
+    <form (submit)="onSubmit($event)">
+      <fieldset class="login-grid">
+        <input
+          [(ngModel)]="username"
+          name="username"
+          placeholder="Login"
+          autocomplete="username"
+        />
+        <input
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Password"
+          type="password"
+          autocomplete="current-password"
+        />
+        <button type="submit">Zaloguj</button>
+      </fieldset>
+    </form>
+  </section>
+</main>

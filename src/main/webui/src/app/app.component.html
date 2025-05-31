@@ -1,7 +1,9 @@
 <main class="container-fluid">
-  <app-navbar></app-navbar>
-  <app-car-list-container></app-car-list-container>
+  <ng-container *ngIf="!loading">
+    <app-login-page *ngIf="!isAuthenticated"></app-login-page>
+    <ng-container *ngIf="isAuthenticated">
+      <app-navbar></app-navbar>
+      <app-car-list-container></app-car-list-container>
+    </ng-container>
+  </ng-container>
 </main>
-
-
-
