@@ -19,6 +19,6 @@ export class AuthService {
       'Content-Type': 'application/x-www-form-urlencoded',
     });
 
-    return this.http.post(this.url, body.toString(), { headers, observe: 'response' });
+    return this.http.post(this.url, body.toString(), { headers, observe: 'response', withCredentials: true });
   }
 }
