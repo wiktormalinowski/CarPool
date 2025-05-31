@@ -2,20 +2,30 @@
   Samochody {{ reservedView ? 'zarezerwowane' : 'dostępne do rezerwacji' }}
 </h3>
 
-<div class="car-grid">
-  @for (car of cars; track car.id) {
+@if (cars.length === 0) {
+  <div class="placeholder-container">
     <article class="card">
-      <section>
-        @for (key of getCarKeys(); track key) {
-          <p><strong>{{ key }}:</strong> {{ car[key] }}</p>
-        }
-      </section>
-      <footer style="text-align: right;">
-        <button
-          (click)="reservedView ? reserveCar(car, false) : reserveCar(car, true)">
-          {{ reservedView ? 'Zwolnij' : 'Zarezerwuj' }}
-        </button>
-      </footer>
+      <p>Brak samochodów {{ reservedView ? 'zarezerwowanych' : 'dostępnych do rezerwacji' }}.</p>
     </article>
-  }
-</div>
+  </div>
+}
+
+@if (cars.length > 0) {
+  <div class="car-grid">
+    @for (car of cars; track car.id) {
+      <article class="card">
+        <section>
+          @for (key of getCarKeys(); track key) {
+            <p><strong>{{ key }}:</strong> {{ car[key] }}</p>
+          }
+        </section>
+        <footer style="text-align: right;">
+          <button
+            (click)="reservedView ? reserveCar(car, false) : reserveCar(car, true)">
+            {{ reservedView ? 'Zwolnij' : 'Zarezerwuj' }}
+          </button>
+        </footer>
+      </article>
+    }
+  </div>
+}
