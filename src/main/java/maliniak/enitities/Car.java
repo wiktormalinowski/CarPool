@@ -1,7 +1,9 @@
 package maliniak.enitities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 
 
 /**
@@ -28,5 +30,8 @@ public class Car extends PanacheEntity {
     public String name;
     public String colour;
     public int mileage;
-    public boolean reserved;
+
+    @OneToOne(mappedBy = "car")
+    @JsonIgnore
+    public Reservation reservation;
 }

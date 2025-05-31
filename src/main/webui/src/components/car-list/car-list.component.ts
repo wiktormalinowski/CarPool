@@ -20,9 +20,8 @@ export class CarListComponent implements OnInit {
   }
 
   fetchCars(): void {
-    this.carService.getCars().subscribe((data: any[]) => {
-      this.cars = data.filter((car: any) => car.reserved === this.reservedView);
-    });
+    (this.reservedView ? this.carService.getMyCars() : this.carService.getFreeCars())
+      .subscribe(cars => this.cars = cars);
   }
 
   removeCar(car: any) {
@@ -31,8 +30,14 @@ export class CarListComponent implements OnInit {
     });
   }
 
-  reserveCar(car: any, reserve: boolean): void {
-    this.carService.updateReservation(car.id, reserve).subscribe(() => {
+  reserveCar(car: any): void {
+    this.carService.reserve(car.id).subscribe(() => {
+      this.actionCompleted.emit();
+    });
+  }
+
+  releaseCar(car: any): void {
+    this.carService.release(car.id).subscribe(() => {
       this.actionCompleted.emit();
     });
   }

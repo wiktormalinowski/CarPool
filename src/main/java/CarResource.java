@@ -1,38 +1,75 @@
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.SecurityContext;
 import maliniak.enitities.Car;
+import maliniak.enitities.Reservation;
 
 import java.util.List;
-import java.util.Map;
 
 @Path("/api/cars")
 public class CarResource {
+
     @GET
-    public List<Car> getAll() {
-        return Car.listAll();
+    public List<Car> getFreeCars() {
+        return Car.list("reservation IS NULL");
     }
 
-    @PATCH
-    @Path("{id}/reserved")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    @Path("/my-reserved")
+    public List<Car> getMyReservedCars(@Context SecurityContext ctx) {
+        String username = ctx.getUserPrincipal().getName();
+        return Reservation.findCarsReservedByUser(username);
+    }
+
+    @POST
+    @Path("/{carId}/reserve")
     @Transactional
-    public Response updateReservation(@PathParam("id") Long id, Map<String, Object> body) {
-        Car car = Car.findById(id);
+    public Response reserveCar(@PathParam("carId") Long carId, @Context SecurityContext ctx) {
+        String username = ctx.getUserPrincipal().getName();
+
+        Car car = Car.findById(carId);
+        if (car == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .build();
+        }
+
+        boolean alreadyReserved = Reservation.find("car", car).firstResult() != null;
+        if (alreadyReserved) {
+            return Response.status(Response.Status.CONFLICT)
+                    .build();
+        }
+
+        Reservation reservation = new Reservation();
+        reservation.username = username;
+        reservation.car = car;
+        reservation.persist();
+
+        return Response.status(Response.Status.CREATED)
+                .build();
+    }
+
+    @POST
+    @Path("/{carId}/release")
+    @Transactional
+    public Response releaseCar(@PathParam("carId") Long carId, @Context SecurityContext ctx) {
+        String username = ctx.getUserPrincipal().getName();
+
+        Car car = Car.findById(carId);
         if (car == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        Object reservedValue = body.get("reserved");
-        if (!(reservedValue instanceof Boolean)) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Missing or invalid 'reserved' field").build();
+        Reservation reservation = Reservation.find("car = ?1 and username = ?2", car, username).firstResult();
+        if (reservation == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
+        car.reservation = null;
+        car.persist();
+        reservation.delete();
 
-        car.reserved = (Boolean) reservedValue;
-        return Response.ok(car).build();
+        return Response.ok().build();
     }
 
     @DELETE

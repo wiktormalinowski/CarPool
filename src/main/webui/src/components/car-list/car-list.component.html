@@ -21,7 +21,7 @@
         </section>
         <footer style="text-align: right;">
           <button
-            (click)="reservedView ? reserveCar(car, false) : reserveCar(car, true)">
+            (click)="reservedView ? releaseCar(car) : reserveCar(car)">
             {{ reservedView ? 'Zwolnij' : 'Zarezerwuj' }}
           </button>
         </footer>
