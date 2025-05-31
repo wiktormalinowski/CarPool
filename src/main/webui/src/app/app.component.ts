@@ -5,7 +5,7 @@ import {CarListContainerComponent} from '../components/car-list-container/car-li
 
 @Component({
   selector: 'app-root',
-  imports: [CarListComponent, NavbarComponent, CarListContainerComponent],
+  imports: [NavbarComponent, CarListContainerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
