@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {LogoutComponent} from '../logout/logout.component';
 
 @Component({
@@ -10,5 +10,6 @@ import {LogoutComponent} from '../logout/logout.component';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+  @Input() username!: string;
 
 }

@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
 
   isAuthenticated = false;
   loading = true;
+  username: string = '';
 
   constructor(private authService: AuthService) {}
 
@@ -25,10 +26,12 @@ export class AppComponent implements OnInit {
       next: (user) => {
         this.isAuthenticated = true;
         this.loading = false;
+        this.username = user.username;
       },
       error: () => {
         this.isAuthenticated = false;
         this.loading = false;
+        this.username = '';
       }
     });
   }
