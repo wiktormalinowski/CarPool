@@ -1,4 +1,4 @@
-package maliniak.enitities;
+package maliniak.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;

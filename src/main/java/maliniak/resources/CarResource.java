@@ -1,10 +1,12 @@
+package maliniak.resources;
+
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
-import maliniak.enitities.Car;
-import maliniak.enitities.Reservation;
+import maliniak.entities.Car;
+import maliniak.entities.Reservation;
 
 import java.util.List;
 
